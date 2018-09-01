@@ -9,11 +9,6 @@
     "koa-router": "^7.4.0",
     "nodemon": "^1.18.4"
   },
-  "devDependencies": {
-    "eslint": "^5.4.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
-  },
   "scripts": {
     "start": "node src",
     "start:dev": "nodemon --watch src/ src/index.js"
