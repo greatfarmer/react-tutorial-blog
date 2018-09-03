@@ -73,10 +73,14 @@ exports.list = async (ctx) => {
       .skip((page - 1) * 10)
       .exec();
     const postCount = await Post.count().exec();
+    const limitBodyLength = post => ({
+      ...post.toJSON(),
+      body: post.body.length < 200 ? post.body : `${post.body.slice(0, 200)}...`
+    });
+    ctx.body = posts.map(limitBodyLength);
     // 마지막 페이지 알려 주기
     // ctx.set은 response header를 설정
     ctx.set('Last-Page', Math.ceil(postCount / 10));
-    ctx.body = posts;
   } catch (e) {
     ctx.throw(e, 500);
   }
