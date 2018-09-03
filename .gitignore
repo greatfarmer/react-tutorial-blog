@@ -22,4 +22,3 @@ yarn-error.log*
 
 # blog-backend
 /blog-backend/node_modules
-/blog-backend/.env
