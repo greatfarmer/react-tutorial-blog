@@ -3,10 +3,10 @@ require('dotenv').config();
 const Koa = require('koa');
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
-
 const api = require('./api');
 const mongoose = require('mongoose');
 const session = require('koa-session');
+const ssr = require('./ssr');
 
 const {
   PORT: port = 4000, // 값이 존재하지 않는다면 4000을 기본 값으로 사용
@@ -26,6 +26,7 @@ const router = new Router();
 
 // 라우터 설정
 router.use('/api', api.routes()); // api 라우트 적용
+router.get('/', ssr);
 
 // 라우터 적용 전에 bodyParser 적용
 app.use(bodyParser());
@@ -41,6 +42,9 @@ app.keys = [signKey];
 
 // app 인스턴스에 라우터 적용
 app.use(router.routes()).use(router.allowedMethods());
+
+// 일치하는 것이 없으면 ssr을 실행합니다.
+app.use(ssr);
 
 app.listen(port, () => {
   console.log('listening to port', port);
