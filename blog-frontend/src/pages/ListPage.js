@@ -22,7 +22,7 @@ const ListPage = ({match}) => {
 };
 
 ListPage.preload = (dispatch, params) => {
-  cosnt { page = 1, tag } = params;
+  const { page = 1, tag } = params;
   const ListActions = bindActionCreators(listActions, dispatch);
   return ListActions.getPostList({
     page, tag
